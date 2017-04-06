@@ -18,7 +18,10 @@ public class GameFacade
 
     public void update()
     {
-        //call update methods of all game objects
+        //call update methods of all game objects, this is responsible for moving objects and updating
+        //anything else that needs to change as the game progresses
+        //this gets called 60 times per second. so for example if an object needs to move 200pixels
+        //every second than every time update is called move the object 200/60 pixels
 
     }
     public void render(Canvas canvas) //be aware that canvas coords are raw pixels. not dp units
