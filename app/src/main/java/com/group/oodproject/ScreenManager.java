@@ -10,7 +10,7 @@ import android.graphics.Paint;
 /**
  * Created by User on 4/18/2017.
  */
-
+//Comment
 public class ScreenManager
 {
     private Context context;
