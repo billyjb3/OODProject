@@ -34,10 +34,10 @@ public class Game extends SurfaceView implements Runnable
     private float dx;
     private float dy;
 
-    public Game(Context context)
+    public Game(Context context, int shipChoice)
     {
         super(context);
-        gameFacade = new GameFacade(shipChoice);
+        gameFacade = new GameFacade(context, shipChoice);
 
         canvas = new Canvas();
         running = false;

@@ -15,7 +15,6 @@ public class BattleShipDecorator extends shipDecorator{
         shipToBeDecorated.setHitBoxHeight(shipToBeDecorated.getHitBoxWidth()+20);
         shipToBeDecorated.setHitBoxWidth(shipToBeDecorated.getHitBoxWidth()+20);
         shipToBeDecorated.setName("Super Bad Ass Battle Ship" );
-        shipToBeDecorated.setImg("IMAGE LINK HERE"); //TODO img link for battle ship
     }
 
     public String getName() {
@@ -34,10 +33,6 @@ public class BattleShipDecorator extends shipDecorator{
         return shipToBeDecorated.getLevel();
     }
 
-    public String getImg() {
-        return shipToBeDecorated.getImg();
-    }
-
     public int getHitBoxWidth() {
         return shipToBeDecorated.getHitBoxWidth();
     }
@@ -52,10 +47,6 @@ public class BattleShipDecorator extends shipDecorator{
 
     public void setLevel(int level) {
         shipToBeDecorated.setLevel(level);
-    }
-
-    public void setImg(String img) {
-        shipToBeDecorated.setImg(img);
     }
 
     public void setHitBoxWidth(int width) {
@@ -91,5 +82,6 @@ public class BattleShipDecorator extends shipDecorator{
     public void render(Canvas canvas) {
 
     }
+
 
 }

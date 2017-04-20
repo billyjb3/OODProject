@@ -14,6 +14,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Button continueButton;
     private Button menuButton;
     private Game game;
+    private int shipChoice;
 
     private boolean started = false;
     private boolean gameCreated = false;
@@ -39,7 +40,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         spw = this.getResources().getDisplayMetrics().widthPixels;
         sdpw = spw / density;
 
-        game = new Game(this);
+        game = new Game(this, shipChoice);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             else
             {
                 gameLayout.removeView(game);
-                game = new Game(this);
+                game = new Game(this, shipChoice);
                 gameLayout.addView(game);
                 setContentView(gameLayout, gameLayout.getLayoutParams());
                 started = true;

@@ -1,5 +1,6 @@
 package com.group.oodproject;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
@@ -17,19 +18,21 @@ public class GameFacade
     protected MotherShip ship;
     protected int gameLevel, killCount;
 
-    public GameFacade(int shipChoice)
-    {
+    public GameFacade(Context context, int shipChoice) {
+
         ship = new baseShip();
+        ScreenManager sm = new ScreenManager(context);
 
         //Decorate players ship
         switch(shipChoice){
             case 1:
                 BattleShipDecorator Battleship = new BattleShipDecorator(ship);
-                ship = Battleship;
+                //TODO set name for the resource folder to hold images
+                //sm.getImage()
                 break;
             case 2:
                 CruiserDecorator Cruiser = new CruiserDecorator(ship);
-                ship = Cruiser;
+                //ship = Cruiser;
                 break;
             default:
                 break;
