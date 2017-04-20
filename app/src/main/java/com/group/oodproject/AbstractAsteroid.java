@@ -3,18 +3,14 @@ package com.group.oodproject;
 import android.graphics.Canvas;
 import android.media.Image;
 
-public class Asteroid {
+/**
+ * Created by jsli3 on 4/19/2017.
+ */
+//Asteroid provides a template for creating other asteroid variants.
+public abstract class Asteroid {
 
     private int level, health, x_position_start, x_position_end, current_y, current_x,hbox_width, hbox_height;
     private Image asteroidPic;
-
-    public Asteroid(int level, int x_position_start, int x_position_end, int hbox_width, int hbox_height) {
-        this.level = level;
-        this.x_position_start = x_position_start;
-        this.x_position_end = x_position_end;
-        this.hbox_width = hbox_width;
-        this.hbox_height = hbox_height;
-    }
 
     public int getLevel() {
         return level;
@@ -93,4 +89,5 @@ public class Asteroid {
     public void update(){
         //TODO check health condition and update img, if zero or less set img to 0%
     };
+
 }
