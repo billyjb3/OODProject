@@ -1,19 +1,25 @@
 package com.group.oodproject;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 public class baseShip implements MotherShip {
 
-	private String name, img;
+	private String name;
 	private Projectile thisWeapon;
 	private int health, level, hitBoxWidth, hitBoxHeight;
-
-	public baseShip() {
+	private ScreenManager sm;
+	private int bmH, bmW;
+	private Bitmap img;
+	public baseShip(ScreenManager sm) {
 		this.name = "Super Awesome Space Ship Alpha";
 		this.hitBoxHeight = 100;
 		this.hitBoxWidth = 100;
+
+		this.bmH = 50;
+		this.bmW = 50;
+
 		this.level = 1;
-		this.img = "PUT THE IMAGE LINK HERE"; //TODO Place the image link here for this ship
 		this.thisWeapon = new Rocket();
 		this.health = 100;
 	}
@@ -42,11 +48,6 @@ public class baseShip implements MotherShip {
 	}
 
 	@Override
-	public String getImg() {
-		return img;
-	}
-
-	@Override
 	public int getHitBoxWidth() {
 		return hitBoxWidth;
 	}
@@ -67,8 +68,18 @@ public class baseShip implements MotherShip {
 	}
 
 	@Override
-	public void setImg(String img) {
-		this.img = img;
+	public void setImg(int id) {
+		this.img = sm.getImage(id,bmH,bmW);
+	}
+
+	@Override
+	public void setImg(Bitmap bitmap) {
+		this.img = bitmap;
+	}
+
+	@Override
+	public Bitmap getImg() {
+		return this.img;
 	}
 
 	@Override
