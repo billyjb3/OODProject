@@ -12,7 +12,11 @@
         android:layout_height="wrap_content"
         android:text="Menu"
         android:layout_alignParentRight="true"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
         android:id="@+id/menuButton"
         android:background="@android:color/transparent"/>
+
+
 
 </RelativeLayout>

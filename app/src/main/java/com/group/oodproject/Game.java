@@ -27,27 +27,18 @@ public class Game extends SurfaceView implements Runnable
     private long displayFPS;
     private long displayUPS;
 
-    private float testX;
-    private float testY;
-    private float dx;
-    private float dy;
+    private int score = 0;
+    private int health = 0;
 
     public Game(Context context)
     {
         super(context);
-        gameFacade = new GameFacade();
-
         canvas = new Canvas();
+        gameFacade = new GameFacade(context, canvas);
         running = false;
         holder = getHolder();
         paint = new Paint();
         density = getResources().getDisplayMetrics().density;
-
-        testX = this.getX();
-        testY = this.getY();
-        dx = 5;
-        dy = 5;
-
     }
     @Override
     public void run()
@@ -83,18 +74,6 @@ public class Game extends SurfaceView implements Runnable
     }
     private void update()
     {
-        if(testX >= this.getWidth() - 25)
-            dx = -5;
-        if(testX <= this.getX())
-            dx = 5;
-        if(testY >= this.getHeight() - 25)
-            dy = -5;
-        if(testY <= this.getY())
-            dy = 5;
-
-        testX += dx;
-        testY += dy;
-
         gameFacade.update(); //this updates all game objects in facade class
     }
     private void render()
@@ -102,15 +81,11 @@ public class Game extends SurfaceView implements Runnable
         if(holder.getSurface().isValid())
         {
             canvas = holder.lockCanvas();
-
             canvas.drawColor(Color.BLACK);
             paint.setColor(Color.WHITE);
-            paint.setTextSize(45);
-            canvas.drawText("FPS: " + displayFPS + "  |  UPS: " + displayUPS, this.getX(), this.getY() + 25*density, paint);
-            canvas.drawText("TEST", testX, testY, paint);
-
+            paint.setTextSize(25);
+            canvas.drawText("FPS: " + displayFPS + "  |  UPS: " + displayUPS, this.getX(), this.getY() + 15*density, paint);
             gameFacade.render(canvas); //renders all game objects in the facade class
-
             holder.unlockCanvasAndPost(canvas);
         }
     }
