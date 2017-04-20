@@ -28,8 +28,10 @@ public class DynamicCoordinate
         {
             if(Math.abs(dx) < Math.abs(sx) || Math.abs(dy) < Math.abs(sy))
             {
-                x = dx;
-                y = dy;
+                if(dx != 0)
+                    x = dx;
+                if(dy != 0)
+                    y = dy;
                 done = true;
             }
             else
@@ -41,8 +43,9 @@ public class DynamicCoordinate
             }
         }
     }
-    public void setDestination(DynamicCoordinate destination)
+    public void setDestination(DynamicCoordinate destination, int speed)
     {
+        this.speed = speed;
         this.destination = destination;
         dx = destination.getX() - x;
         dy = destination.getY() - y;
