@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 public interface MotherShip {
- public String getName();
+    public String getName();
  public int getHealth();
  public Projectile getWeapon();
  public int getLevel();

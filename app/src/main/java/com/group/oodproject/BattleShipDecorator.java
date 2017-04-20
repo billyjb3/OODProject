@@ -1,11 +1,12 @@
 package com.group.oodproject;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 /**
  * Created by Andrew on 4/4/17.
  */
-public class BattleShipDecorator extends shipDecorator{
+public class BattleShipDecorator extends ShipDecorator {
 
     public BattleShipDecorator(MotherShip shipToBeDecorated) {
         super(shipToBeDecorated);
@@ -15,7 +16,7 @@ public class BattleShipDecorator extends shipDecorator{
         shipToBeDecorated.setHitBoxHeight(shipToBeDecorated.getHitBoxWidth()+20);
         shipToBeDecorated.setHitBoxWidth(shipToBeDecorated.getHitBoxWidth()+20);
         shipToBeDecorated.setName("Super Bad Ass Battle Ship" );
-        shipToBeDecorated.setImg("IMAGE LINK HERE"); //TODO img link for battle ship
+        // To Add shipToBeDecorated.setImg( add id when mipmap gets merged with drew's branch) );
     }
 
     public String getName() {
@@ -34,10 +35,6 @@ public class BattleShipDecorator extends shipDecorator{
         return shipToBeDecorated.getLevel();
     }
 
-    public String getImg() {
-        return shipToBeDecorated.getImg();
-    }
-
     public int getHitBoxWidth() {
         return shipToBeDecorated.getHitBoxWidth();
     }
@@ -54,9 +51,12 @@ public class BattleShipDecorator extends shipDecorator{
         shipToBeDecorated.setLevel(level);
     }
 
-    public void setImg(String img) {
-        shipToBeDecorated.setImg(img);
-    }
+    public void setImg(Bitmap bitmap) {shipToBeDecorated.setImg(bitmap);}
+
+    public void setImg(int id) {shipToBeDecorated.setImg(id);}
+
+    public Bitmap getImg(){return shipToBeDecorated.getImg();}
+
 
     public void setHitBoxWidth(int width) {
         shipToBeDecorated.setHitBoxWidth(width);

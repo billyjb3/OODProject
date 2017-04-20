@@ -11,6 +11,7 @@ public class baseShip implements MotherShip {
 	private ScreenManager sm;
 	private int bmH, bmW;
 	private Bitmap img;
+	
 	public baseShip(ScreenManager sm) {
 		this.name = "Super Awesome Space Ship Alpha";
 		this.hitBoxHeight = 100;
