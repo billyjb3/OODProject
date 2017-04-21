@@ -16,10 +16,13 @@ public class GameFacade
     protected ArrayList<Asteroid> asteroidList;
     protected MotherShip ship;
     protected int gameLevel, killCount;
-
+    protected ScreenManager screenManager;
     public GameFacade(int shipChoice)
     {
-        ship = new BaseShip();
+
+
+        //screenManager = new ScreenManager();
+        ship = new BaseShip(screenManager);
 
         //Decorate players ship
         switch(shipChoice){
