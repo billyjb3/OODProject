@@ -6,16 +6,17 @@ package com.group.oodproject;
 
 public class DynamicCoordinate
 {
-    private float x;
-    private float y;
+    private double x;
+    private double y;
     private DynamicCoordinate destination;
-    private float speed;
+    private boolean done = false;
+    private double speed;
     private double sx;
     private double sy;
     private double dx;
     private double dy;
 
-    public DynamicCoordinate(float x, float y)
+    public DynamicCoordinate(double x, double y)
     {
         this.x = x;
         this.y = y;
@@ -23,12 +24,15 @@ public class DynamicCoordinate
 
     public void update()
     {
-        if(destination != null || sx != dx || sy != dy)
+        if(destination != null && !done)
         {
-            if(dx < sx || dy < sy)
+            if(Math.abs(dx) < Math.abs(sx) || Math.abs(dy) < Math.abs(sy))
             {
-                x = (float) dx;
-                y = (float) dy;
+                if(dx != 0)
+                    x = dx;
+                if(dy != 0)
+                    y = dy;
+                done = true;
             }
             else
             {
@@ -39,8 +43,9 @@ public class DynamicCoordinate
             }
         }
     }
-    public void setDestination(DynamicCoordinate destination)
+    public void setDestination(DynamicCoordinate destination, int speed)
     {
+        this.speed = speed;
         this.destination = destination;
         dx = destination.getX() - x;
         dy = destination.getY() - y;
@@ -53,20 +58,24 @@ public class DynamicCoordinate
     {
         return destination;
     }
-    public void setSpeed(float speed)
+    public void setSpeed(double speed)
     {
         this.speed = speed;
     }
-    public float getSpeed()
+    public double getSpeed()
     {
         return speed;
     }
-    public float getX()
+    public double getX()
     {
         return x;
     }
-    public float getY()
+    public double getY()
     {
         return y;
+    }
+    public boolean isDone()
+    {
+        return done;
     }
 }

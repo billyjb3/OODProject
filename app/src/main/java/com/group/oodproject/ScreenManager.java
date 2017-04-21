@@ -33,11 +33,15 @@ public class ScreenManager
     }
     public void render(Bitmap image, DynamicCoordinate coordinate)
     {
-        canvas.drawBitmap(image, coordinate.getX(), coordinate.getY(), paint);
+        canvas.drawBitmap(image, (float) coordinate.getX(), (float) coordinate.getY(), paint);
     }
     public void render(Bitmap image, float x, float y)
     {
         canvas.drawBitmap(image, x, y, paint);
+    }
+    public Canvas getCanvas()
+    {
+        return canvas;
     }
     private Bitmap decodeSampledBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight)
     {
