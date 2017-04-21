@@ -11,16 +11,17 @@ public class BaseProjectile implements Projectile {
 	double dammult=1.5;
 	DynamicCoordinate dm;
 	ScreenManager sm;
-	int speed;
+	int speed, renderSafetyLimit;
 	Bitmap img;
 	//Sound sound=something;
 	int bmW,bmH;
 	public BaseProjectile(ScreenManager sm){
+		dm = new DynamicCoordinate(0,0);
 		this.sm = sm;
 		damage=Projectile.baseDamage*dammult;
-		bmW = bmH = 50;
-		speed = 40;
-
+		bmW = bmH = 10;
+		speed = 10;
+		renderSafetyLimit = 0;
 	}
 
 	@Override
@@ -41,6 +42,7 @@ public class BaseProjectile implements Projectile {
 	@Override
 	public void target(DynamicCoordinate d) {
 		dm.setDestination(d, speed);
+		Log.d(TAG,"targeting: " + d.getX() + "   " + d.getY());
 	}
 
 	@Override
@@ -51,9 +53,13 @@ public class BaseProjectile implements Projectile {
 
 	@Override
 	public void render() {
-		sm.render(img,dm);
-		update();
-		Log.d(TAG, "RENDER PROJECTILE");
+		renderSafetyLimit++;
+		if(renderSafetyLimit < 30){
+			sm.render(img,dm);
+			update();
+			Log.d(TAG, "render Projectile");
+		}
+
 	}
 
 	@Override
@@ -84,6 +90,11 @@ public class BaseProjectile implements Projectile {
 	@Override
 	public double getDamage() {
 		return 0;
+	}
+
+	@Override
+	public DynamicCoordinate getLocation(){
+		return dm;
 	}
 
 }

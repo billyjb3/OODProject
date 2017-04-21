@@ -25,6 +25,7 @@ public class GameFacade
     protected int gameLevel, killCount;
     protected ScreenManager screenManager;
     protected Context context;
+    protected DynamicCoordinate shipPos;
     public GameFacade(Context context, int shipChoice)
     {
 
@@ -116,17 +117,18 @@ public class GameFacade
         screenManager.setCanvas(canvas);
         Bitmap shipBitmap = screenManager1.getImage(R.drawable.spaceship14, 60, 60);
         DynamicCoordinate astroLocation, projectileLocation;
-
-        screenManager.render(shipBitmap, (350), canvas.getHeight() - 350); //TODO just using these coords for testing, need to base off of fullscreen canvas size
+        shipPos = new DynamicCoordinate(350, (canvas.getHeight() - 350)); //TODO just using these coords for testing, need to base off of fullscreen canvas size
+        screenManager.render(shipBitmap, shipPos);
         for (Asteroid astro:asteroidList
              ) {
             //astro.setImage(astroBitmap);
             astroLocation = astro.getLocation();
             screenManager.render(astro.getImage(), astroLocation );
         }
-        for (Projectile projecitle:projectileList
+        for (Projectile projectile:projectileList
                 ) {
-            projecitle.render(); //TODO do we want to pass ship a screen manager as well?
+            projectile.render(); //TODO do we want to pass ship a screen manager as well?
+            //screenManager.render(projectile.getImg(),projectile.getLocation());
         }
 
     }
@@ -161,12 +163,12 @@ public class GameFacade
             DynamicCoordinate target = new DynamicCoordinate(target_x, target_y);
 
             //send one of those explosive things over there
-            BaseProjectile projectile = new BaseProjectile(screenManager);
+            Projectile projectile = new BaseProjectile(screenManager);
             BigRocketDecorator brd = new BigRocketDecorator(projectile);
-            projectile.setStartPos(350, 350);
-            projectile.setSpeed(40);
+            projectile.setStartPos(shipPos);
+            projectile.setSpeed(50);
             projectile.target(target);
-
+            projectileList.add(projectile);
 
             //create a projectile and target the coordinates
 

@@ -17,4 +17,5 @@ public interface Projectile {
 	public void setImg(Bitmap bitmap);
 	public Bitmap getImg();
 	public double getDamage();
+	public DynamicCoordinate getLocation();
 }

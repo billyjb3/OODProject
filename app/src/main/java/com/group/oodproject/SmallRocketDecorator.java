@@ -69,4 +69,9 @@ public class SmallRocketDecorator extends ProjectileDecorator {
 	public double getDamage() {
 		return decoratedProjectile.getDamage();
 	}
+
+	@Override
+	public DynamicCoordinate getLocation() {
+		return decoratedProjectile.getLocation();
+	}
 }

@@ -1,6 +1,9 @@
 package com.group.oodproject;
 
 import android.graphics.Bitmap;
+import android.util.Log;
+
+import static android.content.ContentValues.TAG;
 
 public class BigRocketDecorator extends ProjectileDecorator {
 	protected Projectile decoratedProjectile;
@@ -40,6 +43,7 @@ public class BigRocketDecorator extends ProjectileDecorator {
 	@Override
 	public void render() {
 		decoratedProjectile.render();
+		Log.d(TAG, "RENDER PROJECTILE - DECORATOR");
 	}
 
 	@Override
@@ -71,5 +75,11 @@ public class BigRocketDecorator extends ProjectileDecorator {
 	public double getDamage() {
 		return decoratedProjectile.getDamage();
 	}
+
+	@Override
+	public DynamicCoordinate getLocation() {
+		return decoratedProjectile.getLocation();
+	}
+
 
 }
