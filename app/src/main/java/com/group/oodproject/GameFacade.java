@@ -50,7 +50,8 @@ public class GameFacade
 
         //check the astroid list and add another asteroid if there are less asteroid than the game level
         if(asteroidList.size() < gameLevel){
-            //TODO randomize the x end and x start
+            //randomize the asteroid start x and y
+            //TODO asteroid start and y rand
             Asteroid asteroid = new Asteroid(1,300,200,100,100);
             asteroidList.add(asteroid);
         }

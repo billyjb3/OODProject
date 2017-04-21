@@ -37,11 +37,6 @@ public abstract class shipDecorator implements MotherShip{
     }
 
     @Override
-    public String getImg() {
-        return img;
-    }
-
-    @Override
     public int getHitBoxWidth() {
         return hitBoxWidth;
     }
@@ -59,11 +54,6 @@ public abstract class shipDecorator implements MotherShip{
     @Override
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    @Override
-    public void setImg(String img) {
-        this.img = img;
     }
 
     @Override
