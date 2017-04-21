@@ -1,5 +1,6 @@
 package com.group.oodproject;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
@@ -17,11 +18,12 @@ public class GameFacade
     protected MotherShip ship;
     protected int gameLevel, killCount;
     protected ScreenManager screenManager;
-    public GameFacade(int shipChoice)
+    protected Context context;
+    public GameFacade(Context context, int shipChoice)
     {
 
-
-        //screenManager = new ScreenManager();
+        this.context = context;
+        screenManager = new ScreenManager(this.context);
         ship = new BaseShip(screenManager);
 
         //Decorate players ship

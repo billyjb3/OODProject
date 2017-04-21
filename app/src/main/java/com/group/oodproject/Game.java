@@ -37,7 +37,7 @@ public class Game extends SurfaceView implements Runnable
     public Game(Context context)
     {
         super(context);
-        gameFacade = new GameFacade(shipChoice);
+        gameFacade = new GameFacade(context, shipChoice);
 
         canvas = new Canvas();
         running = false;
