@@ -3,7 +3,7 @@ package com.group.oodproject;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-public class baseShip implements MotherShip {
+public class BaseShip implements MotherShip {
 
 	private String name;
 	private Projectile thisWeapon;
@@ -11,8 +11,8 @@ public class baseShip implements MotherShip {
 	private ScreenManager sm;
 	private int bmH, bmW;
 	private Bitmap img;
-	
-	public baseShip(ScreenManager sm) {
+
+	public BaseShip(ScreenManager sm) {
 		this.name = "Super Awesome Space Ship Alpha";
 		this.hitBoxHeight = 100;
 		this.hitBoxWidth = 100;
@@ -21,7 +21,7 @@ public class baseShip implements MotherShip {
 		this.bmW = 50;
 
 		this.level = 1;
-		this.thisWeapon = new Rocket();
+		//this.thisWeapon = new
 		this.health = 100;
 	}
 
@@ -119,7 +119,6 @@ public class baseShip implements MotherShip {
 
 	@Override
 	public void fire(int xCord, int yCord) {
-		System.out.println(name + " is firing at cordinates X:"+ xCord + " Y:" +yCord);
-		Rocket rocket = new Rocket();
-		rocket.target(xCord, yCord);	}
+
+	}
 }

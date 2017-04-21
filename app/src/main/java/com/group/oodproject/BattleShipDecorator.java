@@ -72,9 +72,8 @@ public class BattleShipDecorator extends ShipDecorator {
 
     @Override
     public void fire(int xCord, int yCord) {
-        System.out.println(shipToBeDecorated.getName()+ " is firing at cordinates X:"+ xCord + " Y:" +yCord);
-        Rocket rocket = new Rocket();
-        rocket.target(xCord, yCord);
+       //Fire methods would need to be changed probably
+
     }
 
     @Override

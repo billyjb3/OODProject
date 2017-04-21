@@ -70,9 +70,7 @@ public class CruiserDecorator extends ShipDecorator {
 
     @Override
     public void fire(int xCord, int yCord) {
-        System.out.println(shipToBeDecorated.getName()+ " is firing at cordinates X:"+ xCord + " Y:" +yCord);
-        Laser laser = new Laser();
-        laser.target(xCord, yCord);
+
     }
 
     @Override

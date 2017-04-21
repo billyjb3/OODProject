@@ -19,7 +19,7 @@ public class GameFacade
 
     public GameFacade(int shipChoice)
     {
-        ship = new baseShip();
+        ship = new BaseShip();
 
         //Decorate players ship
         switch(shipChoice){

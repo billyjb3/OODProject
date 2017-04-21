@@ -1,17 +1,20 @@
 package com.group.oodproject;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by Andrew on 4/4/17.
  */
-public abstract class shipDecorator implements MotherShip{
+public abstract class ShipDecorator implements MotherShip{
 
     protected MotherShip shipToBeDecorated;
-    private String name, img;
+    private String name;
     private Projectile thisWeapon;
     private int health, level, hitBoxWidth, hitBoxHeight;
+    private Bitmap img;
 
 
-    public shipDecorator(MotherShip shipToBeDecorated) {
+    public ShipDecorator(MotherShip shipToBeDecorated) {
         this.shipToBeDecorated = shipToBeDecorated;
     }
 
@@ -37,11 +40,6 @@ public abstract class shipDecorator implements MotherShip{
     }
 
     @Override
-    public String getImg() {
-        return img;
-    }
-
-    @Override
     public int getHitBoxWidth() {
         return hitBoxWidth;
     }
@@ -62,8 +60,17 @@ public abstract class shipDecorator implements MotherShip{
     }
 
     @Override
-    public void setImg(String img) {
-        this.img = img;
+    public void setImg(int id) {
+        // Potentially do nothing here because it won't be used every
+    }
+    @Override
+    public void setImg(Bitmap bitmap) {
+        this.img = bitmap;
+    }
+
+    @Override
+    public Bitmap getImg() {
+        return img;
     }
 
     @Override
