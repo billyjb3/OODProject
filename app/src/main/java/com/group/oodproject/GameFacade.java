@@ -164,7 +164,7 @@ public class GameFacade
             BaseProjectile projectile = new BaseProjectile(screenManager);
             BigRocketDecorator brd = new BigRocketDecorator(projectile);
             projectile.setStartPos(350, 350);
-            projectile.setSpeed(100);
+            projectile.setSpeed(40);
             projectile.target(target);
 
 
