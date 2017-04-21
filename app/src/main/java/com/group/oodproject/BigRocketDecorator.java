@@ -8,7 +8,7 @@ public class BigRocketDecorator extends ProjectileDecorator {
 	public BigRocketDecorator(Projectile decoratedProjectile){
 		super(decoratedProjectile);
 		decoratedProjectile.setMult(2);
-
+		decoratedProjectile.setImg(R.drawable.rocket2);
 	}
 
 	@Override
@@ -23,6 +23,7 @@ public class BigRocketDecorator extends ProjectileDecorator {
 
 	@Override
 	public void target(double x_pos, double y_pos) {
+
 		decoratedProjectile.target(x_pos,y_pos);
 	}
 

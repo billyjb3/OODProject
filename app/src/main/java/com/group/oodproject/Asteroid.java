@@ -1,19 +1,54 @@
 package com.group.oodproject;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.media.Image;
+
+import static java.lang.Math.abs;
 
 public class Asteroid {
 
     private int level, health, x_position_start, x_position_end, current_y, current_x,hbox_width, hbox_height;
     private Image asteroidPic;
 
-    public Asteroid(int level, int x_position_start, int x_position_end, int hbox_width, int hbox_height) {
-        this.level = level;
-        this.x_position_start = x_position_start;
-        this.x_position_end = x_position_end;
-        this.hbox_width = hbox_width;
-        this.hbox_height = hbox_height;
+    private DynamicCoordinate location;
+    private Bitmap image;
+    private double hitboxWidth = 100;
+    private double hitboxHeight = 100;
+
+
+    public Asteroid(DynamicCoordinate start, DynamicCoordinate end, int speed)
+    {
+        this.health = 100;
+        this.location = start;
+        start.setDestination(end, speed);
+    }
+
+    public void update()
+    {
+        location.update();
+    }
+
+    public DynamicCoordinate getLocation()
+    {
+        return location;
+    }
+    public void setImage(Bitmap image)
+    {
+        this.image = image;
+    }
+    public Bitmap getImage()
+    {
+        return image;
+    }
+
+    public boolean checkHitbox(DynamicCoordinate projectile){
+        if(abs(location.getX() - projectile.getX()) < hitboxWidth && abs(location.getY()-projectile.getY()) < hitboxHeight){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public int getLevel() {
@@ -90,7 +125,4 @@ public class Asteroid {
 
     public void render(Canvas canvas){};
 
-    public void update(){
-        //TODO check health condition and update img, if zero or less set img to 0%
-    };
 }

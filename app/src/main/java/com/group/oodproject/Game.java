@@ -85,19 +85,8 @@ public class Game extends SurfaceView implements Runnable
     }
     private void update()
     {
-        if(testX >= this.getWidth() - 25)
-            dx = -5;
-        if(testX <= this.getX())
-            dx = 5;
-        if(testY >= this.getHeight() - 25)
-            dy = -5;
-        if(testY <= this.getY())
-            dy = 5;
 
-        testX += dx;
-        testY += dy;
-
-        gameFacade.update(); //this updates all game objects in facade class
+        gameFacade.update(canvas); //this updates all game objects in facade class
     }
     private void render()
     {
@@ -109,7 +98,6 @@ public class Game extends SurfaceView implements Runnable
             paint.setColor(Color.WHITE);
             paint.setTextSize(45);
             canvas.drawText("FPS: " + displayFPS + "  |  UPS: " + displayUPS, this.getX(), this.getY() + 25*density, paint);
-            canvas.drawText("TEST", testX, testY, paint);
 
             gameFacade.render(canvas); //renders all game objects in the facade class
 

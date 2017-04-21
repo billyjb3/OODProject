@@ -1,6 +1,9 @@
 package com.group.oodproject;
 
 import android.graphics.Bitmap;
+import android.util.Log;
+
+import static android.content.ContentValues.TAG;
 
 public class BaseProjectile implements Projectile {
 
@@ -16,7 +19,7 @@ public class BaseProjectile implements Projectile {
 		this.sm = sm;
 		damage=Projectile.baseDamage*dammult;
 		bmW = bmH = 50;
-		speed = 0;
+		speed = 40;
 
 	}
 
@@ -50,6 +53,7 @@ public class BaseProjectile implements Projectile {
 	public void render() {
 		sm.render(img,dm);
 		update();
+		Log.d(TAG, "RENDER PROJECTILE");
 	}
 
 	@Override

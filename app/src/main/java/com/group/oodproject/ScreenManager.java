@@ -20,7 +20,7 @@ public class ScreenManager
     public ScreenManager(Context context)
     {
         this.context = context;
-        this. paint = new Paint();
+        this.paint = new Paint();
     }
     public void setCanvas(Canvas canvas)
     {
