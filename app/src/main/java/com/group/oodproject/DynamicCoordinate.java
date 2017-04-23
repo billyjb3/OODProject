@@ -15,6 +15,8 @@ public class DynamicCoordinate
     private double sy;
     private double dx;
     private double dy;
+    private int hitWidth, hitHeight;
+    private HitBox hitBox;
 
     public DynamicCoordinate(double x, double y)
     {
@@ -24,24 +26,49 @@ public class DynamicCoordinate
 
     public void update()
     {
-        if(destination != null && !done)
+        if (destination != null && !done)
         {
-            if(Math.abs(dx) < Math.abs(sx) || Math.abs(dy) < Math.abs(sy))
+            if (Math.abs(dx) < Math.abs(sx) || Math.abs(dy) < Math.abs(sy))
             {
-                if(dx != 0)
+                if (dx != 0)
                     x = dx;
-                if(dy != 0)
+                if (dy != 0)
                     y = dy;
                 done = true;
-            }
-            else
+            } else
             {
-                x += sx;
-                y += sy;
+                this.move(sx, sy);
+                if(hitBox != null)
+                    hitBox.getCorner2().move(sx, sy);
                 dx -= sx;
                 dy -= sy;
             }
         }
+    }
+
+    public void setHitBox(int width, int height)
+    {
+        hitBox = new HitBox(this, width, height);
+    }
+
+    public void move(double dx, double dy)
+    {
+        this.x += dx;
+        this.y += dy;
+    }
+    public void setHitBox(DynamicCoordinate corner2)
+    {
+        hitBox = new HitBox(this, corner2);
+    }
+
+    public HitBox getHitBox()
+    {
+        return hitBox;
+    }
+
+    public boolean isHit(DynamicCoordinate coordinate)
+    {
+        return hitBox.isHit(coordinate.getHitBox());
     }
     public void setDestination(DynamicCoordinate destination, int speed)
     {
@@ -66,13 +93,13 @@ public class DynamicCoordinate
     {
         return speed;
     }
-    public double getX()
+    public int getX()
     {
-        return x;
+        return (int)x;
     }
-    public double getY()
+    public int getY()
     {
-        return y;
+        return (int)y;
     }
     public boolean isDone()
     {

@@ -1,94 +1,66 @@
 package com.group.oodproject;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
+import android.content.res.Resources;
 
 /**
  * Created by Andrew on 4/4/17.
  */
-public class BattleShipDecorator extends ShipDecorator {
-
-    public BattleShipDecorator(MotherShip shipToBeDecorated) {
-        super(shipToBeDecorated);
-
-        //Battle ship is large (bigger hitbox) but has more health
-        shipToBeDecorated.setHealth(shipToBeDecorated.getHealth()+30);
-        shipToBeDecorated.setHitBoxHeight(shipToBeDecorated.getHitBoxWidth()+20);
-        shipToBeDecorated.setHitBoxWidth(shipToBeDecorated.getHitBoxWidth()+20);
-        shipToBeDecorated.setName("Super Bad Ass Battle Ship" );
-        // To Add shipToBeDecorated.setImg( add id when mipmap gets merged with drew's branch) );
-    }
-
-    public String getName() {
-        return shipToBeDecorated.getName();
-    }
-
-    public int getHealth() {
-        return shipToBeDecorated.getHealth();
-    }
-
-    public Projectile getWeapon() {
-        return shipToBeDecorated.getWeapon();
-    }
-
-    public int getLevel() {
-        return shipToBeDecorated.getLevel();
-    }
-
-    public int getHitBoxWidth() {
-        return shipToBeDecorated.getHitBoxWidth();
-    }
-
-    public int getHitBoxHeight() {
-        return shipToBeDecorated.getHitBoxHeight();
-    }
-
-    public void setHealth(int health) {
-        shipToBeDecorated.setHealth(health);
-    }
-
-    public void setLevel(int level) {
-        shipToBeDecorated.setLevel(level);
-    }
-
-    public void setImg(Bitmap bitmap) {shipToBeDecorated.setImg(bitmap);}
-
-    public void setImg(int id) {shipToBeDecorated.setImg(id);}
-
-    public Bitmap getImg(){return shipToBeDecorated.getImg();}
-
-
-    public void setHitBoxWidth(int width) {
-        shipToBeDecorated.setHitBoxWidth(width);
-    }
-
-    public void setHitBoxHeight(int height) {
-        shipToBeDecorated.setHitBoxHeight(height);
-    }
-    public void setName(String name){
-        shipToBeDecorated.setName(name);
-    }
-
-
-    @Override
-    public void fire(int xCord, int yCord) {
-       //Fire methods would need to be changed probably
-
+public class BattleShipDecorator extends ShipDecorator2
+{
+    public BattleShipDecorator(MotherShip ship)
+    {
+        super(ship);
+        setSize();
+        setName();
+        setHealth();
+        setWeapon();
+        setLevel();
     }
 
     @Override
-    public void damage(int damageAmount) {
-        shipToBeDecorated.setHealth(shipToBeDecorated.getHealth() - damageAmount);
+    public void setSize()
+    {
+        this.width = 50;
+        this.height = 50;
+        setImage();
+        this.width = image.getWidth();
+        this.height = image.getHeight();
+        this.location = new DynamicCoordinate(Resources.getSystem().getDisplayMetrics().widthPixels/2 - width/2, Resources.getSystem().getDisplayMetrics().heightPixels - height);
+        this.location.setHitBox(location.getX() + width - 1, location.getY() + height - 1);
     }
 
     @Override
-    public void destroy(){
-        System.out.println("BOOOOOM! You are dead!");
+    public void setName()
+    {
+        this.name = "Battle Ship";
     }
 
     @Override
-    public void render(Canvas canvas) {
-
+    public void setHealth()
+    {
+        this.health = 1000;//change number as necessary;
     }
 
+    @Override
+    public void setWeapon()
+    {
+        //this.weapon = new BigRocketDecorator(new BaseProjectile(this.screenManager));
+    }
+
+    @Override
+    public void setLevel()
+    {
+        this.level = 1;
+    }
+
+    @Override
+    public void setImage()
+    {
+        this.image = screenManager.getImage(R.drawable.spaceship14, this.width, this.height);
+    }
+    @Override
+    public void render()
+    {
+        screenManager.render(this.image, this.location);
+    }
 }

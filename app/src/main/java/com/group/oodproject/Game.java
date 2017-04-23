@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -34,22 +35,17 @@ public class Game extends SurfaceView implements Runnable
     private float dx;
     private float dy;
 
-    public Game(Context context)
+    public Game(Context context, int shipChoice)
     {
         super(context);
-        gameFacade = new GameFacade(context, shipChoice);
 
+        this.shipChoice = shipChoice;
+        gameFacade = new GameFacade(context, shipChoice);
         canvas = new Canvas();
         running = false;
         holder = getHolder();
         paint = new Paint();
         density = getResources().getDisplayMetrics().density;
-
-        testX = this.getX();
-        testY = this.getY();
-        dx = 5;
-        dy = 5;
-
     }
     @Override
     public void run()
@@ -85,8 +81,7 @@ public class Game extends SurfaceView implements Runnable
     }
     private void update()
     {
-
-        gameFacade.update(canvas); //this updates all game objects in facade class
+        gameFacade.update(); //this updates all game objects in facade class
     }
     private void render()
     {
@@ -97,7 +92,8 @@ public class Game extends SurfaceView implements Runnable
             canvas.drawColor(Color.BLACK);
             paint.setColor(Color.WHITE);
             paint.setTextSize(45);
-            canvas.drawText("FPS: " + displayFPS + "  |  UPS: " + displayUPS, this.getX(), this.getY() + 25*density, paint);
+            canvas.drawText("FPS: " + displayFPS, this.getX(), this.getY() + 25*density, paint);
+            canvas.drawText("TEST", testX, testY, paint);
 
             gameFacade.render(canvas); //renders all game objects in the facade class
 
@@ -118,27 +114,11 @@ public class Game extends SurfaceView implements Runnable
         catch (Exception e){e.printStackTrace();}
     }
 
+    @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        Log.d("MYTAG", "TouchEvent Activated");
         gameFacade.touchEvent(event);
-
-
-
-        int eventAction = event.getAction();
-
-        float tempDX = 0;
-        float tempDY = 0;
-        float xPos, yPos;
-
-        if(eventAction == MotionEvent.ACTION_DOWN)//location of initial touch
-        {
-
-        }
-        else if(eventAction == MotionEvent.ACTION_UP)//location of release
-        {
-
-        }
-
 
         return true;
     }

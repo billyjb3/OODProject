@@ -5,81 +5,37 @@ import android.util.Log;
 
 import static android.content.ContentValues.TAG;
 
-public class BigRocketDecorator extends ProjectileDecorator {
-	protected Projectile decoratedProjectile;
-	
-	public BigRocketDecorator(Projectile decoratedProjectile){
-		super(decoratedProjectile);
-		decoratedProjectile.setMult(2);
-		decoratedProjectile.setImg(R.drawable.rocket2);
-	}
+public class BigRocketDecorator extends ProjectileDecorator
+{
+    public BigRocketDecorator(Projectile projectile)
+    {
+        super(projectile);
+    }
 
-	@Override
-	public void setStartPos(double x, double y){
-		decoratedProjectile.setStartPos(x,y);
-	}
+    @Override
+    public void setImage()
+    {
+        this.image = screenManager.getImage(R.drawable.rocket2, 10, 50);
+        this.width = image.getWidth();
+        this.height = image.getHeight();
+        this.location.setHitBox(width, height);
+    }
 
-	@Override
-	public void setStartPos(DynamicCoordinate d){
-		decoratedProjectile.setStartPos(d);
-	}
+    @Override
+    public void setSpeed()
+    {
+        this.speed = 20;
+    }
 
-	@Override
-	public void target(double x_pos, double y_pos) {
+    @Override
+    public void setDamage()
+    {
+        this.damage = 5;
+    }
 
-		decoratedProjectile.target(x_pos,y_pos);
-	}
-
-	@Override
-	public void target(DynamicCoordinate d) {
-		decoratedProjectile.target(d);
-	}
-
-	@Override
-	public void setSpeed(int x) {
-		decoratedProjectile.setSpeed(x);
-	}
-
-	@Override
-	public void render() {
-		decoratedProjectile.render();
-		Log.d(TAG, "RENDER PROJECTILE - DECORATOR");
-	}
-
-	@Override
-	public void update() {
-		decoratedProjectile.update();
-	}
-
-	@Override
-	public void setMult(double x) {
-		decoratedProjectile.setMult(x);
-	}
-
-	@Override
-	public void setImg(Bitmap bitmap){
-		decoratedProjectile.setImg(bitmap);
-	}
-
-	@Override
-	public void setImg(int id){
-		decoratedProjectile.setImg(id);
-	}
-
-	@Override
-	public Bitmap getImg(){
-		return decoratedProjectile.getImg();
-	}
-
-	@Override
-	public double getDamage() {
-		return decoratedProjectile.getDamage();
-	}
-
-	@Override
-	public DynamicCoordinate getLocation() {
-		return decoratedProjectile.getLocation();
-	}
-
-
+    @Override
+    public void setMultiplier()
+    {
+        this.multiplier = 1;
+    }
 }

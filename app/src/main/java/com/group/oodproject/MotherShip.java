@@ -3,23 +3,57 @@ package com.group.oodproject;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-public interface MotherShip {
-    public String getName();
- public int getHealth();
- public Projectile getWeapon();
- public int getLevel();
- public int getHitBoxWidth();
- public int getHitBoxHeight();
- public void setHealth(int health);
- public void setLevel(int level);
- public void setImg(int id);
- public void setImg(Bitmap bitmap);
- public Bitmap getImg();
- public void setHitBoxWidth(int width);
- public void setHitBoxHeight(int height);
- public void setName(String name);
- public void fire(int xCord, int yCord);
- public void damage(int damageAmount);
- public void destroy();
- public void render(Canvas canvas);
+public abstract class MotherShip
+{
+    protected String name;
+    protected int health;
+    protected Projectile weapon;
+    protected int level;
+    protected int width, height;
+
+    protected ScreenManager screenManager;
+    protected Bitmap image;
+    protected DynamicCoordinate location;
+
+
+    public void update()
+    {
+
+    }
+    public void render()
+    {
+        screenManager.render(image, location);
+    }
+    public DynamicCoordinate getLocation()
+    {
+        return location;
+    }
+    public String getName()
+    {
+        return name;
+    }
+    public int getHealth()
+    {
+        return health;
+    }
+    public Projectile getWeapon()
+    {
+        return weapon;
+    }
+    public int getLevel()
+    {
+        return level;
+    }
+    public void damage(int damage)
+    {
+        health -= damage;
+    }
+    public int getWidth()
+    {
+        return width;
+    }
+    public int getHeight()
+    {
+        return height;
+    }
 }
