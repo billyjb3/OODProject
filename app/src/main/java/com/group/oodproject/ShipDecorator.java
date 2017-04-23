@@ -5,11 +5,11 @@ import android.graphics.Bitmap;
 /**
  * Created by Andrew on 4/4/17.
  */
-public abstract class ShipDecorator2 extends MotherShip
+public abstract class ShipDecorator extends MotherShip
 {
     protected MotherShip ship;
 
-    public ShipDecorator2(MotherShip ship)
+    public ShipDecorator(MotherShip ship)
     {
         this.ship = ship;
         this.screenManager = ship.screenManager;

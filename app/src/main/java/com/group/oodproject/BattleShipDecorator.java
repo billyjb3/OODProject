@@ -5,7 +5,7 @@ import android.content.res.Resources;
 /**
  * Created by Andrew on 4/4/17.
  */
-public class BattleShipDecorator extends ShipDecorator2
+public class BattleShipDecorator extends ShipDecorator
 {
     public BattleShipDecorator(MotherShip ship)
     {

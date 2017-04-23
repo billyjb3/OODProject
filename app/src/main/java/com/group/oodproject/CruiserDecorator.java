@@ -3,7 +3,7 @@ package com.group.oodproject;
 /**
  * Created by Andrew on 4/4/17.
  */
-public class CruiserDecorator extends ShipDecorator2
+public class CruiserDecorator extends ShipDecorator
 {
 
     public CruiserDecorator(MotherShip ship)

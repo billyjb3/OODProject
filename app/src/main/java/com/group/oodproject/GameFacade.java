@@ -36,7 +36,7 @@ public class GameFacade
         this.shipChoice = shipChoice;
         asteroids = new AsteroidGroup(screenManager, gameLevel);
 
-        ship = new BaseShip2(screenManager);
+        ship = new BaseShip(screenManager);
 
         shipChoice = 1;
         if(shipChoice == 1)

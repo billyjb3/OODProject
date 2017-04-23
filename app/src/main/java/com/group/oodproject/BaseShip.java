@@ -4,10 +4,10 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-public class BaseShip2 extends MotherShip
+public class BaseShip extends MotherShip
 {
 
-    public BaseShip2(ScreenManager screenManager)
+    public BaseShip(ScreenManager screenManager)
     {
         this.screenManager = screenManager;
         this.name = "Super Awesome Space Ship Alpha";
