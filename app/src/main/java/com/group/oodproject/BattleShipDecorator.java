@@ -23,10 +23,10 @@ public class BattleShipDecorator extends ShipDecorator
         this.width = 50;
         this.height = 50;
         setImage();
-        this.width = image.getWidth();
-        this.height = image.getHeight();
+        this.width = image.getScaledWidth(Resources.getSystem().getDisplayMetrics());
+        this.height = image.getScaledHeight(Resources.getSystem().getDisplayMetrics());
         this.location = new DynamicCoordinate(Resources.getSystem().getDisplayMetrics().widthPixels/2 - width/2, Resources.getSystem().getDisplayMetrics().heightPixels - height);
-        this.location.setHitBox(location.getX() + width - 1, location.getY() + height - 1);
+        this.location.setHitBox(width, height);
     }
 
     @Override

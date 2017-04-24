@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/OODProject.iml" filepath="$PROJECT_DIR$/OODProject.iml" />
-      <module fileurl="file://$PROJECT_DIR$/OODProject.iml" filepath="$PROJECT_DIR$/OODProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/OODProject2017.iml" filepath="$PROJECT_DIR$/OODProject2017.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

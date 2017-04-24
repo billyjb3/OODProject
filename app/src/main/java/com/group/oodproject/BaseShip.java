@@ -17,7 +17,5 @@ public class BaseShip extends MotherShip
 
         this.width = 50;
         this.height = 50;
-        location = new DynamicCoordinate(Resources.getSystem().getDisplayMetrics().widthPixels/2 - width/2, Resources.getSystem().getDisplayMetrics().heightPixels - height);
-        location.setHitBox(location.getX() + width - 1, location.getY() + height - 1);
     }
 }

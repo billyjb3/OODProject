@@ -1,5 +1,6 @@
 package com.group.oodproject;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.media.Image;
@@ -12,13 +13,14 @@ public class Asteroid {
     private DynamicCoordinate location;
     private Bitmap image;
     private int width, height;
+    private float density;
 
     public Asteroid(DynamicCoordinate start, DynamicCoordinate end, int speed)
     {
         this.health = 100;
         this.location = start;
         start.setDestination(end, speed);
-        this.location.setHitBox(50, 50);
+        density = Resources.getSystem().getDisplayMetrics().density;
     }
 
     public void update()
@@ -33,8 +35,8 @@ public class Asteroid {
     public void setImage(Bitmap image)
     {
         this.image = image;
-        this.width = image.getWidth();
-        this.height = image.getHeight();
+        this.width = image.getScaledWidth(Resources.getSystem().getDisplayMetrics());
+        this.height = image.getScaledHeight(Resources.getSystem().getDisplayMetrics());
         this.location.setHitBox(width, height);
     }
     public Bitmap getImage()

@@ -39,7 +39,9 @@ public class DynamicCoordinate
             {
                 this.move(sx, sy);
                 if(hitBox != null)
+                {
                     hitBox.getCorner2().move(sx, sy);
+                }
                 dx -= sx;
                 dy -= sy;
             }

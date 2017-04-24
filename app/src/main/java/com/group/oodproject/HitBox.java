@@ -24,9 +24,11 @@ public class HitBox
     {
         DynamicCoordinate c1 = box.getCorner1();
         DynamicCoordinate c2 = box.getCorner2();
-        if((c1.getX() <= corner2.getX() && c1.getX() >= corner1.getX()) || (c2.getX() <= corner2.getX() && c2.getX() >= corner1.getX()))
+        if((c1.getX() <= corner2.getX() && c1.getX() >= corner1.getX()) | (c2.getX() <= corner2.getX() && c2.getX() >= corner1.getX()) |
+                (corner1.getX() <= c2.getX() && corner1.getX() >= c1.getX()))
         {
-            if((c1.getY() <= corner2.getY() && c1.getY() >= corner1.getY()) || (c2.getY() <= corner2.getY() && c2.getY() >= corner1.getY()))
+            if((c1.getY() <= corner2.getY() && c1.getY() >= corner1.getY()) | (c2.getY() <= corner2.getY() && c2.getY() >= corner1.getY()) |
+                    (corner1.getY() <= c2.getY() && corner1.getY() >= c1.getY()))
                 return true;
         }
         return false;

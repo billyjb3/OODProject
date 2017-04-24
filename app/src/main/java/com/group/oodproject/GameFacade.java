@@ -55,10 +55,21 @@ public class GameFacade
     public void update()
     {
         background.update();
-        asteroids.update();
         projectiles.update();
-        ship.update();
-
+        for(int i = 0; i < asteroids.getSize(); i++)
+        {
+            for(int j = 0; j < projectiles.getSize(); j++)
+            {
+                if(asteroids.getSize() != 0 && projectiles.getProjectile(j).getLocation().isHit(asteroids.getAsteroid(i).getLocation()))
+                {
+                    projectiles.removeProjectile(projectiles.getProjectile(j));
+                    asteroids.removeAsteroid(asteroids.getAsteroid(i));
+                    if(i > 0)
+                        i--;
+                }
+            }
+        }
+        asteroids.update();
         for(int i = 0; i < asteroids.getSize(); i++)
         {
             if(ship.getLocation().isHit(asteroids.getAsteroid(i).getLocation()))
@@ -70,7 +81,7 @@ public class GameFacade
             }
             for(int j = 0; j < projectiles.getSize(); j++)
             {
-                if(projectiles.getProjectile(j).getLocation().isHit(asteroids.getAsteroid(i).getLocation()))
+                if(asteroids.getSize() != 0 && projectiles.getProjectile(j).getLocation().isHit(asteroids.getAsteroid(i).getLocation()))
                 {
                     projectiles.removeProjectile(projectiles.getProjectile(j));
                     asteroids.removeAsteroid(asteroids.getAsteroid(i));
@@ -79,6 +90,7 @@ public class GameFacade
                 }
             }
         }
+        ship.update();
     }
     public void render(Canvas canvas)
     {

@@ -1,5 +1,6 @@
 package com.group.oodproject;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.util.Log;
 
@@ -16,8 +17,8 @@ public class BigRocketDecorator extends ProjectileDecorator
     public void setImage()
     {
         this.image = screenManager.getImage(R.drawable.rocket2, 10, 50);
-        this.width = image.getWidth();
-        this.height = image.getHeight();
+        this.width = image.getScaledWidth(Resources.getSystem().getDisplayMetrics());
+        this.height = image.getScaledHeight(Resources.getSystem().getDisplayMetrics());
         this.location.setHitBox(width, height);
     }
 
