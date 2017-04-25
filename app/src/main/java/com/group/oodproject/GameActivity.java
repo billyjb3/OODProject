@@ -35,13 +35,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
         int newUiOptions = uiOptions;
         if (Build.VERSION.SDK_INT >= 14) {
-            newUiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+            //newUiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         }
+
         if (Build.VERSION.SDK_INT >= 16) {
             newUiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
         }
         if (Build.VERSION.SDK_INT >= 18) {
-            newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+            //newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         }
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
 
@@ -67,6 +68,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             {
                 setContentView(R.layout.game_screen);
                 menuButton = (Button) findViewById(R.id.menuButton);
+                menuButton.setVisibility(View.VISIBLE);
                 gameLayout = (RelativeLayout) findViewById(R.id.gameLayout);
                 gameLayout.addView(game);
                 menuButton.setOnClickListener(this);

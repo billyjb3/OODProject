@@ -2,6 +2,7 @@ package com.group.oodproject;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.view.MotionEvent;
 
 import java.util.Random;
@@ -24,6 +25,7 @@ public class GameFacade
     private int gameLevel, killCount, shipChoice;
     private Random r = new Random();
     private int screenWidth, screenHeight;
+    private Paint paint;
 
 
     public GameFacade(Context context, int shipChoice)
@@ -35,6 +37,8 @@ public class GameFacade
         gameLevel = 2;
         this.shipChoice = shipChoice;
         asteroids = new AsteroidGroup(screenManager, gameLevel);
+
+        paint = new Paint();
 
         ship = new BaseShip(screenManager);
 
@@ -54,6 +58,8 @@ public class GameFacade
 
     public void update()
     {
+        //if(ship.getHealth() <= 0)
+            //GAMEOVER!!!!!!
         background.update();
         projectiles.update();
         for(int i = 0; i < asteroids.getSize(); i++)
@@ -75,6 +81,7 @@ public class GameFacade
             if(ship.getLocation().isHit(asteroids.getAsteroid(i).getLocation()))
             {
                 asteroids.removeAsteroid(asteroids.getAsteroid(i));
+                ship.damage(50);
                 //reduce ship health
                 if(i > 0)
                    i--;
@@ -95,6 +102,8 @@ public class GameFacade
     public void render(Canvas canvas)
     {
         screenManager.setCanvas(canvas); //this must remain the first method called. canvas changes every render.
+
+
         background.render();
         ship.render();
         asteroids.render();

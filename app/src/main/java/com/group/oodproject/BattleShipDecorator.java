@@ -38,7 +38,7 @@ public class BattleShipDecorator extends ShipDecorator
     @Override
     public void setHealth()
     {
-        this.health = 1000;//change number as necessary;
+        this.health = 500;//change number as necessary;
     }
 
     @Override
