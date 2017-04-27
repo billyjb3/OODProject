@@ -30,7 +30,7 @@ public class AsteroidGroup
         screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
         r = new Random();
         maxAsteroids = level;
-        asteroidInterval = 120;
+        asteroidInterval = 80;
         intervalCount = asteroidInterval;
     }
 
