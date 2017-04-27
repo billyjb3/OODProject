@@ -5,6 +5,8 @@ import android.content.res.Resources;
 /**
  * Created by User on 4/26/2017.
  */
+
+//This is a concrete asteroid. It starts at the same speed as the basic asteroid but slowly accelerates.
 public class AcceleratingAsteroid extends Asteroid
 {
     private int age;

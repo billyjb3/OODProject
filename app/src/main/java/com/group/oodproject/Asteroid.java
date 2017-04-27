@@ -7,6 +7,7 @@ import android.media.Image;
 
 import static java.lang.Math.abs;
 
+//The abstract asteroid class.
 public abstract class Asteroid {
 
     protected int level, health;
