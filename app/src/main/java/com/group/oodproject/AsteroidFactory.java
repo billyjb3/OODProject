@@ -17,16 +17,14 @@ public class AsteroidFactory
         int roll = r.nextInt()/10 + level;
 
         if (roll  < 5) {
-            return new BasicAsteroid(start, end, 10);
+            return new BasicAsteroid(start, end);
         }
-        else if (roll  >= 5) {
-            return new AcceleratingAsteroid(start, end, 10);
+        else if (roll  >= 5 && roll <= 9) {
+            return new FastAsteroid(start, end);
         }
-        else if (roll  >= 10) {
-            return new ToughAsteroid(start, end, 10);
+        else  {
+            return new AcceleratingFastAsteroid(start, end);
         }
-        else
-            return new BasicAsteroid(start, end, 10);
     }
 
     public void update(int level)

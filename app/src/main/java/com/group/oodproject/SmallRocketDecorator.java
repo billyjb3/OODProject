@@ -16,7 +16,7 @@ public class SmallRocketDecorator extends ProjectileDecorator
 	@Override
 	public void setImage()
 	{
-		this.image = screenManager.getImage(R.drawable.rocket, 10, 50);
+		this.image = screenManager.getImage(R.drawable.rocket2, 10, 50);
 		this.width = image.getScaledWidth(Resources.getSystem().getDisplayMetrics());
 		this.height = image.getScaledHeight(Resources.getSystem().getDisplayMetrics());
 		this.location.setHitBox(width, height);

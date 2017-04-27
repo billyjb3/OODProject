@@ -34,6 +34,7 @@ public class ScreenManager
     public void render(Bitmap image, DynamicCoordinate coordinate)
     {
         canvas.drawBitmap(image, (float) coordinate.getX(), (float) coordinate.getY(), paint);
+
     }
     public void render(Bitmap image, float x, float y)
     {

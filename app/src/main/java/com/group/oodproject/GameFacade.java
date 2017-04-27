@@ -85,7 +85,7 @@ public class GameFacade
                     {
                         projectiles.removeProjectile(projectiles.getProjectile(j));
                         asteroids.removeAsteroid(asteroids.getAsteroid(i));
-                        score += 10 + gameLevel;
+                        score += 50 + 5 * gameLevel;
                         gameLevel = score/100 + 1;
                         if(i > 0)
                             i--;
@@ -108,7 +108,7 @@ public class GameFacade
                     {
                         projectiles.removeProjectile(projectiles.getProjectile(j));
                         asteroids.removeAsteroid(asteroids.getAsteroid(i));
-                        score += 10 + gameLevel;
+                        score += 50 + gameLevel * 5;
                         gameLevel = score/100 + 1;
                         if(i > 0)
                             i--;

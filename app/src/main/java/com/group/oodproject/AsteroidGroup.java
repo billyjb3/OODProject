@@ -39,7 +39,7 @@ public class AsteroidGroup
         if(this.level != level)
         {
             this.level = level;
-            maxAsteroids = level/2;
+            maxAsteroids = level*2;
             if(asteroidInterval > 30)
                 asteroidInterval = 120/(1 + (level/20));
             intervalCount = asteroidInterval;
@@ -48,7 +48,7 @@ public class AsteroidGroup
         if(asteroids.size() < maxAsteroids && intervalCount == asteroidInterval)
         {
             Asteroid a = asteroidFactory.CreateAsteroid(new DynamicCoordinate(r.nextInt(screenWidth) + 1, 0), new DynamicCoordinate(r.nextInt(screenWidth) + 1, screenHeight));
-            a.setImage(screenManager.getImage(R.drawable.aestroid, 50, 50));
+            a.setImage(screenManager.getImage(R.drawable.asteroid_a_100, 50, 50));
             asteroids.add(a);
             intervalCount = 0;
         }

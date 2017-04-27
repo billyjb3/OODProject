@@ -7,31 +7,22 @@ import android.media.Image;
 
 import static java.lang.Math.abs;
 
-public class Asteroid {
+public abstract class Asteroid {
 
-    private int level, health;
-    private DynamicCoordinate location;
-    private Bitmap image;
-    private int width, height;
-    private float density;
+    protected int level, health;
+    protected DynamicCoordinate location, destination;
+    protected Bitmap image;
+    protected int width, height;
+    protected float density;
 
-    public Asteroid(DynamicCoordinate start, DynamicCoordinate end, int speed)
-    {
-        this.health = 100;
-        this.location = start;
-        start.setDestination(end, speed);
-        density = Resources.getSystem().getDisplayMetrics().density;
-    }
 
-    public void update()
-    {
-        location.update();
-    }
+    public abstract void update();
 
     public DynamicCoordinate getLocation()
     {
         return location;
     }
+
     public void setImage(Bitmap image)
     {
         this.image = image;
