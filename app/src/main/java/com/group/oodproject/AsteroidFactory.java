@@ -20,7 +20,7 @@ public class AsteroidFactory
             return new BasicAsteroid(start, end);
         }
         else if (roll  >= 5 && roll <= 9) {
-            return new FastAsteroid(start, end);
+            return new AcceleratingAsteroid(start, end);
         }
         else  {
             return new AcceleratingFastAsteroid(start, end);
