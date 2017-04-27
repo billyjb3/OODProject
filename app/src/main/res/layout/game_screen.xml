@@ -12,10 +12,60 @@
         android:layout_height="wrap_content"
         android:text="Menu"
         android:layout_alignParentRight="true"
-        android:textSize="20dp"
-        android:layout_marginTop="15dp"
+        android:textSize="15dp"
         android:id="@+id/menuButton"
         android:background="@android:color/transparent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scoreTextView"
+        android:text="Score:"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/healthTextView"
+        android:layout_toRightOf="@+id/scoreTextView"
+        android:text="Health:"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Game Over!!! You Died!!! xD"
+        android:textSize="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="180dp"
+        android:id="@+id/gameOverText"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gameOverButtonLayout"
+        android:layout_below="@+id/gameOverText"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Restart"
+            android:background="@android:color/transparent"
+            android:id="@+id/restartButton"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="Main Menu"
+            android:id="@+id/mainMenuButton"/>
+    </LinearLayout>
 
 
 

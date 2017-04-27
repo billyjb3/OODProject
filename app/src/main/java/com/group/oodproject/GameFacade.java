@@ -3,6 +3,7 @@ package com.group.oodproject;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.Handler;
 import android.view.MotionEvent;
 
 import java.util.Random;
@@ -14,7 +15,8 @@ import java.util.Random;
 public class GameFacade
 {
     //Game objects are all contained here
-    private Context context;
+    private Handler handler;
+    private EngineContainer container;
     private ScreenManager screenManager;
     private Background background;
 
@@ -22,27 +24,23 @@ public class GameFacade
     private AsteroidGroup asteroids;
     private ProjectileGroup projectiles;
 
-    private int gameLevel, killCount, shipChoice;
+    private int gameLevel, score, shipChoice;
     private Random r = new Random();
-    private int screenWidth, screenHeight;
-    private Paint paint;
 
-
-    public GameFacade(Context context, int shipChoice)
+    public GameFacade(EngineContainer container)
     {
-        this.context = context;
-        screenManager = new ScreenManager(context);
+        this.container = container;
+        container.setGameFacade(this);
+        screenManager = new ScreenManager(container.getGameActivity());
         background = new Background(screenManager);
 
-        gameLevel = 2;
-        this.shipChoice = shipChoice;
-        asteroids = new AsteroidGroup(screenManager, gameLevel);
-
-        paint = new Paint();
+        handler = new Handler();
+        gameLevel = 1;
+        asteroids = new AsteroidGroup(screenManager);
 
         ship = new BaseShip(screenManager);
 
-        shipChoice = 1;
+        shipChoice = 1; //get rid of this once game menues are added
         if(shipChoice == 1)
         {
             ship = new BattleShipDecorator(ship);
@@ -58,46 +56,69 @@ public class GameFacade
 
     public void update()
     {
-        //if(ship.getHealth() <= 0)
-            //GAMEOVER!!!!!!
-        background.update();
-        projectiles.update();
-        for(int i = 0; i < asteroids.getSize(); i++)
+        if(ship.getHealth() <= 0)
         {
-            for(int j = 0; j < projectiles.getSize(); j++)
+            handler.post(new Runnable()
             {
-                if(asteroids.getSize() != 0 && projectiles.getProjectile(j).getLocation().isHit(asteroids.getAsteroid(i).getLocation()))
+                public void run()
                 {
-                    projectiles.removeProjectile(projectiles.getProjectile(j));
+                    container.getGameActivity().gameOver();
+                }
+            });
+        }
+        else
+        {
+            handler.post(new Runnable()
+            {
+                public void run()
+                {
+                    container.getGameActivity().setHealth(ship.getHealth());
+                    container.getGameActivity().setScore(score);
+                }
+            });
+
+            background.update();
+            projectiles.update();
+            for(int i = 0; i < asteroids.getSize(); i++)
+            {
+                for(int j = 0; j < projectiles.getSize(); j++)
+                {
+                    if(asteroids.getSize() != 0 && projectiles.getProjectile(j).getLocation().isHit(asteroids.getAsteroid(i).getLocation()))
+                    {
+                        projectiles.removeProjectile(projectiles.getProjectile(j));
+                        asteroids.removeAsteroid(asteroids.getAsteroid(i));
+                        score += 10 + gameLevel;
+                        gameLevel = score/100 + 1;
+                        if(i > 0)
+                            i--;
+                    }
+                }
+            }
+            asteroids.update(gameLevel);
+            for(int i = 0; i < asteroids.getSize(); i++)
+            {
+                if(ship.getLocation().isHit(asteroids.getAsteroid(i).getLocation()))
+                {
                     asteroids.removeAsteroid(asteroids.getAsteroid(i));
+                    ship.damage(50);
                     if(i > 0)
                         i--;
                 }
-            }
-        }
-        asteroids.update();
-        for(int i = 0; i < asteroids.getSize(); i++)
-        {
-            if(ship.getLocation().isHit(asteroids.getAsteroid(i).getLocation()))
-            {
-                asteroids.removeAsteroid(asteroids.getAsteroid(i));
-                ship.damage(50);
-                //reduce ship health
-                if(i > 0)
-                   i--;
-            }
-            for(int j = 0; j < projectiles.getSize(); j++)
-            {
-                if(asteroids.getSize() != 0 && projectiles.getProjectile(j).getLocation().isHit(asteroids.getAsteroid(i).getLocation()))
+                for(int j = 0; j < projectiles.getSize(); j++)
                 {
-                    projectiles.removeProjectile(projectiles.getProjectile(j));
-                    asteroids.removeAsteroid(asteroids.getAsteroid(i));
-                    if(i > 0)
-                        i--;
+                    if(asteroids.getSize() != 0 && projectiles.getProjectile(j).getLocation().isHit(asteroids.getAsteroid(i).getLocation()))
+                    {
+                        projectiles.removeProjectile(projectiles.getProjectile(j));
+                        asteroids.removeAsteroid(asteroids.getAsteroid(i));
+                        score += 10 + gameLevel;
+                        gameLevel = score/100 + 1;
+                        if(i > 0)
+                            i--;
+                    }
                 }
             }
+            ship.update();
         }
-        ship.update();
     }
     public void render(Canvas canvas)
     {

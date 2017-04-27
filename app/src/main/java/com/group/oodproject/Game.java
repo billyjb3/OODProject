@@ -17,10 +17,10 @@ import android.view.SurfaceView;
 public class Game extends SurfaceView implements Runnable
 {
     private GameFacade gameFacade;
+    private EngineContainer engineContainer;
     private Thread gameThread;
     private Canvas canvas;
     private Boolean running;
-    private int shipChoice;
 
     private long UPS = 60;
     private float density;
@@ -28,19 +28,14 @@ public class Game extends SurfaceView implements Runnable
     private Paint paint;
 
     private long displayFPS;
-    private long displayUPS;
 
-    private float testX;
-    private float testY;
-    private float dx;
-    private float dy;
-
-    public Game(Context context, int shipChoice)
+    public Game(Context context, EngineContainer container)
     {
         super(context);
 
-        this.shipChoice = shipChoice;
-        gameFacade = new GameFacade(context, shipChoice);
+        this.engineContainer = container;
+        container.setGame(this);
+        gameFacade = new GameFacade(container);
         canvas = new Canvas();
         running = false;
         holder = getHolder();
@@ -65,7 +60,6 @@ public class Game extends SurfaceView implements Runnable
             if (delta >= nano)
             {
                 displayFPS = frames;
-                displayUPS = updates;
                 frames = 0;
                 updates = 0;
                 start = System.nanoTime();
@@ -91,9 +85,8 @@ public class Game extends SurfaceView implements Runnable
 
             canvas.drawColor(Color.BLACK);
             paint.setColor(Color.WHITE);
-            paint.setTextSize(45);
-            canvas.drawText("FPS: " + displayFPS, this.getX(), this.getY() + 25*density, paint);
-            canvas.drawText("TEST", testX, testY, paint);
+            paint.setTextSize(15);
+            canvas.drawText("FPS: " + displayFPS, this.getX(), this.getY() + 5*density, paint);
 
             gameFacade.render(canvas); //renders all game objects in the facade class
 
@@ -117,9 +110,7 @@ public class Game extends SurfaceView implements Runnable
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        Log.d("MYTAG", "TouchEvent Activated");
         gameFacade.touchEvent(event);
-
         return true;
     }
 }

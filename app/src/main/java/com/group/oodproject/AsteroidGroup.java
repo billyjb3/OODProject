@@ -13,29 +13,41 @@ public class AsteroidGroup
 {
     private ArrayList<Asteroid> asteroids;
     private ScreenManager screenManager;
+    private AsteroidFactory asteroidFactory;
     private int maxAsteroids;
     private int asteroidInterval = 25;
     private int intervalCount = 25;
     private int screenWidth, screenHeight;
+    private int level = 1;
     private Random r;
 
-    public AsteroidGroup(ScreenManager screenManager, int level)
+    public AsteroidGroup(ScreenManager screenManager)
     {
         this.screenManager = screenManager;
+        asteroidFactory = new AsteroidFactory();
         asteroids = new ArrayList<>();
         screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
         screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
         r = new Random();
         maxAsteroids = level;
-        asteroidInterval = 60/level;
+        asteroidInterval = 120;
         intervalCount = asteroidInterval;
     }
 
-    public void update()
+    public void update(int level)
     {
+        if(this.level != level)
+        {
+            this.level = level;
+            maxAsteroids = level/2;
+            if(asteroidInterval > 30)
+                asteroidInterval = 120/(1 + (level/20));
+            intervalCount = asteroidInterval;
+            asteroidFactory.update(level);
+        }
         if(asteroids.size() < maxAsteroids && intervalCount == asteroidInterval)
         {
-            Asteroid a = new Asteroid(new DynamicCoordinate(r.nextInt(screenWidth) + 1, 0), new DynamicCoordinate(r.nextInt(screenWidth) + 1, screenHeight), 10);
+            Asteroid a = asteroidFactory.CreateAsteroid(new DynamicCoordinate(r.nextInt(screenWidth) + 1, 0), new DynamicCoordinate(r.nextInt(screenWidth) + 1, screenHeight));
             a.setImage(screenManager.getImage(R.drawable.aestroid, 50, 50));
             asteroids.add(a);
             intervalCount = 0;
