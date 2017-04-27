@@ -35,6 +35,8 @@ public class Background
         r = new Random();
         paint = new Paint();
         paint.setColor(Color.WHITE);
+        for(int i = 0; i < 240; i++)
+            update();
     }
 
     public void update()

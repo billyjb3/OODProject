@@ -6,12 +6,14 @@ package com.group.oodproject;
 
 public class EngineContainer
 {
-    GameActivity gameActivity;
-    Game game;
-    GameFacade gameFacade;
+    private GameActivity gameActivity;
+    private Game game;
+    private GameFacade gameFacade;
+
+    final static int CRUISER = 100;
+    final static int BATTLESHIP = 101;
 
     private int shipChoice;
-    private int weaponChoice; //ship contains preset weapon or players choice?
 
     public EngineContainer(GameActivity gameActivity)
     {

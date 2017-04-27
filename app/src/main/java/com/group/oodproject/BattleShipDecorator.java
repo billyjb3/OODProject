@@ -20,8 +20,8 @@ public class BattleShipDecorator extends ShipDecorator
     @Override
     public void setSize()
     {
-        this.width = 50;
-        this.height = 50;
+        this.width = 70;
+        this.height = 70;
         setImage();
         this.width = image.getScaledWidth(Resources.getSystem().getDisplayMetrics());
         this.height = image.getScaledHeight(Resources.getSystem().getDisplayMetrics());
@@ -38,7 +38,7 @@ public class BattleShipDecorator extends ShipDecorator
     @Override
     public void setHealth()
     {
-        this.health = 500;//change number as necessary;
+        this.health = 50;//change number as necessary;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class BattleShipDecorator extends ShipDecorator
     @Override
     public void setImage()
     {
-        this.image = screenManager.getImage(R.drawable.spaceship14, this.width, this.height);
+        this.image = screenManager.getImage(R.drawable.battleship, this.width, this.height);
     }
     @Override
     public void render()

@@ -31,7 +31,7 @@ public class BigRocketDecorator extends ProjectileDecorator
     @Override
     public void setDamage()
     {
-        this.damage = 5;
+        this.damage = 10;
     }
 
     @Override

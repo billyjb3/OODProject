@@ -44,7 +44,10 @@ public class ProjectileGroup
     public void createProjectile(int shipNumber, DynamicCoordinate destination)
     {
         Projectile projectile = new BaseProjectile(screenManager, new DynamicCoordinate(launchPoint.getX(), launchPoint.getY()), destination);
-        projectile = new BigRocketDecorator(projectile);
+        if(shipNumber == EngineContainer.BATTLESHIP)
+            projectile = new BigRocketDecorator(projectile);
+        else if(shipNumber == EngineContainer.CRUISER)
+            projectile = new SmallRocketDecorator(projectile);
         projectiles.add(projectile);
     }
     public void removeProjectile(Projectile projectile)

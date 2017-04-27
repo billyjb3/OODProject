@@ -27,25 +27,23 @@ public class GameFacade
     private int gameLevel, score, shipChoice;
     private Random r = new Random();
 
-    public GameFacade(EngineContainer container)
+    public GameFacade(EngineContainer container, int shipChoice)
     {
         this.container = container;
         container.setGameFacade(this);
         screenManager = new ScreenManager(container.getGameActivity());
         background = new Background(screenManager);
-
         handler = new Handler();
         gameLevel = 1;
         asteroids = new AsteroidGroup(screenManager);
-
         ship = new BaseShip(screenManager);
+        this.shipChoice = shipChoice;
 
-        shipChoice = 1; //get rid of this once game menues are added
-        if(shipChoice == 1)
+        if(shipChoice == EngineContainer.BATTLESHIP)
         {
             ship = new BattleShipDecorator(ship);
         }
-        else if(shipChoice == 2)
+        else if(shipChoice == EngineContainer.CRUISER)
         {
             ship = new CruiserDecorator(ship);
         }

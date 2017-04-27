@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,6 +16,8 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.w3c.dom.Text;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener
 {
@@ -31,8 +34,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private TextView score;
     private TextView health;
     private TextView gameOverMessage;
+    private TextView pickShipText;
     private LinearLayout gameOverButtonLayout;
-    private int shipNumber = 0;
+    private ImageButton cruiserButton;
+    private ImageButton battleshipButton;
 
     private boolean started = false;
     private boolean gameCreated = false;
@@ -42,11 +47,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_screen);
+
         int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
         int newUiOptions = uiOptions;
-        if (Build.VERSION.SDK_INT >= 14) {
-            //newUiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        }
 
         if (Build.VERSION.SDK_INT >= 16) {
             newUiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
@@ -54,18 +57,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if (Build.VERSION.SDK_INT >= 18) {
             newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         }
+
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
 
         container = new EngineContainer(this);
-
-        menuLayout = (RelativeLayout) findViewById(R.id.menuLayout);
-
-        newButton = (Button) findViewById(R.id.newButton);
-        newButton.setOnClickListener(this);
-        continueButton = (Button) findViewById(R.id.continueButton);
-        continueButton.setOnClickListener(this);
-
-        game = new Game(this, container);
+        //game = new Game(this, container);
+        makeMenuViews();
     }
 
     @Override
@@ -76,49 +73,97 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
             if (gameCreated == false)
             {
-                setContentView(R.layout.game_screen);
-                initGameViews();
-                started = true;
-                gameCreated = true;
-                game.start();
-            } else
+                setPickView();
+            }
+            else
             {
-                setContentView(gameLayout);
                 gameLayout.removeView(game);
                 game = new Game(this, container);
-                initGameViews();
-                started = true;
-                game.start();
+                setPickView();
             }
         }
-        if (v.getId() == continueButton.getId())
+        else if(v.getId() == battleshipButton.getId())
+        {
+            container.setShipChoice(EngineContainer.BATTLESHIP);
+            game = new Game(this, container);
+            setGameViews();
+            started = true;
+            gameCreated = true;
+            game.start();
+        }
+        else if(v.getId() == cruiserButton.getId())
+        {
+            container.setShipChoice(EngineContainer.CRUISER);
+            game = new Game(this, container);
+            setGameViews();
+            started = true;
+            gameCreated = true;
+            game.start();
+        }
+        else if (v.getId() == continueButton.getId())
         {
             setContentView(gameLayout);
             started = true;
             game.start();
         }
-        if (v.getId() == menuButton.getId())
+        else if (v.getId() == menuButton.getId())
         {
             game.stop();
             started = false;
             setContentView(menuLayout);
-
-            continueButton.setVisibility(View.VISIBLE);
+            setContinueView();
         }
-        if(v.getId() == restartButton.getId())
+        else if(v.getId() == restartButton.getId())
         {
             gameLayout.removeView(game);
             game = new Game(this, container);
-            initGameViews();
+            setGameViews();
             game.start();
             started = true;
         }
-        if(v.getId() == mainMenuButton.getId())
+        else if(v.getId() == mainMenuButton.getId())
         {
             setContentView(menuLayout);
             continueButton.setVisibility(View.INVISIBLE);
             continueButton.setActivated(false);
         }
+    }
+
+    public void setIntitialView()
+    {
+        newButton.setActivated(true);
+        newButton.setVisibility(View.VISIBLE);
+        continueButton.setActivated(false);
+        continueButton.setVisibility(View.INVISIBLE);
+        cruiserButton.setActivated(false);
+        cruiserButton.setVisibility(View.INVISIBLE);
+        battleshipButton.setActivated(false);
+        battleshipButton.setVisibility(View.INVISIBLE);
+        pickShipText.setVisibility(View.INVISIBLE);
+    }
+    public void setPickView()
+    {
+        newButton.setActivated(false);
+        newButton.setVisibility(View.INVISIBLE);
+        continueButton.setActivated(false);
+        continueButton.setVisibility(View.INVISIBLE);
+        cruiserButton.setActivated(true);
+        cruiserButton.setVisibility(View.VISIBLE);
+        battleshipButton.setActivated(true);
+        battleshipButton.setVisibility(View.VISIBLE);
+        pickShipText.setVisibility(View.VISIBLE);
+    }
+    public void setContinueView()
+    {
+        newButton.setActivated(true);
+        newButton.setVisibility(View.VISIBLE);
+        continueButton.setActivated(true);
+        continueButton.setVisibility(View.VISIBLE);
+        cruiserButton.setActivated(false);
+        cruiserButton.setVisibility(View.INVISIBLE);
+        battleshipButton.setActivated(false);
+        battleshipButton.setVisibility(View.INVISIBLE);
+        pickShipText.setVisibility(View.INVISIBLE);
     }
 
     public void gameOver()
@@ -136,8 +181,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         menuButton.setActivated(false);
     }
-    public void initGameViews()
+    public void setGameViews()
     {
+        setContentView(R.layout.game_screen);
         gameLayout = (RelativeLayout) findViewById(R.id.gameLayout);
         gameLayout.addView(game);
 
@@ -167,6 +213,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameOverMessage = (TextView) findViewById(R.id.gameOverText);
         gameOverMessage.bringToFront();
         gameOverMessage.setVisibility(View.INVISIBLE);
+
     }
     public void setScore(int score)
     {
@@ -177,6 +224,27 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     {
         String ht = "Health: " + health;
         this.health.setText(ht);
+    }
+    private void makeMenuViews()
+    {
+        menuLayout = (RelativeLayout) findViewById(R.id.menuLayout);
+
+        newButton = (Button) findViewById(R.id.newButton);
+        newButton.setOnClickListener(this);
+        continueButton = (Button) findViewById(R.id.continueButton);
+        continueButton.setOnClickListener(this);
+        cruiserButton = (ImageButton) findViewById(R.id.cruiserIB);
+        cruiserButton.setOnClickListener(this);
+        battleshipButton = (ImageButton) findViewById(R.id.battleIB);
+        battleshipButton.setOnClickListener(this);
+
+        cruiserButton.setVisibility(View.INVISIBLE);
+        cruiserButton.setActivated(false);
+        battleshipButton.setVisibility(View.INVISIBLE);
+        battleshipButton.setActivated(false);
+
+        pickShipText = (TextView) findViewById(R.id.pickText);
+        pickShipText.setVisibility(View.INVISIBLE);
     }
 
     @Override

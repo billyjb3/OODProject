@@ -35,7 +35,7 @@ public class Game extends SurfaceView implements Runnable
 
         this.engineContainer = container;
         container.setGame(this);
-        gameFacade = new GameFacade(container);
+        gameFacade = new GameFacade(container, container.getShipChoice());
         canvas = new Canvas();
         running = false;
         holder = getHolder();
